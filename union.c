@@ -1,26 +1,25 @@
 #include <unistd.h>
 
-int     main(void)
-{
-    int i = 0;
-    static char buff[27];
-    char *av1 = "1233445";
-    char *av2 = "455656756";
+int repeats(char *str, int max, char ch){
+    int i = -1;
+    while(++i < max)
+        if (str[i] == ch)
+            return (0);
+    return (1);
+}
 
-    while (av1[i]){
-        if(!buff[av1[i]]){
-            buff[av1[i]] = 1;
-            write(1, &av1[i], 1);
-        }
-        i++;
-    }
-    i = 0;
-    while (av2[i]){
-        if(!buff[av2[i]]){
-            buff[av2[i]] = 1;
-            write(1, &av2[i], 1);
-        }
-        i++;
-    }
+void ft_union(char *str1, char *str2){
+    int i = -1; int j = -1;
+    while(str1[++i])
+        if(repeats(str1, i, str1[i]))
+            write(1, &str1[i], 1);
+    while(str2[++j])
+        if(repeats(str2, j, str2[j]) && repeats(str1, i, str2[j]))
+            write(1, &str2[j], 1);
+}
+
+int main(int argc, char **argv){
+    if (argc == 3)
+        ft_union(argv[1], argv[2]);
     write(1, "\n", 1);
 }

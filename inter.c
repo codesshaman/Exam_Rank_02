@@ -1,23 +1,35 @@
 #include <unistd.h>
 
-int     main(void)
-{
-	int i = 0;
-	int j = 0;
-	static char tab[127];
-    char *av1 = "1233445";
-    char *av2 = "455656756";
+void ft_inter(char *str1, char *str2) {
+    int i;
+    int j;
+    int ascii[256] = {0};
 
-	while (av1[i]){
-		while (av2[j]){
-			if(!tab[(unsigned char)av1[i]] && av1[i] == av2[j]){
-				tab[(unsigned char)av1[i]] = 1;
-				write(1, &av1[i], 1);
-			}
-			j++;
-		}
-		j = 0;
-		i++;
-	}
+    i = 0;
+    while (str2[i])
+    {
+        if (ascii[(int)str2[i]] == 0)
+            ascii[(int)str2[i]] = 1;
+        i++;
+    }
+
+    i = 0;
+    j = 0;
+    while (str1[i])
+    {
+        if (ascii[(int)str1[i]] == 1)
+        {
+            ascii[(int)str1[i]] = 2;
+            write(1, &str1[i], 1);
+        }
+        i++;
+    }
+
+}
+
+int	main(int argc, char **argv) {
+	if (argc == 3)
+		ft_inter(argv[1], argv[2]);
 	write(1, "\n", 1);
+	return 0;
 }
